@@ -90,7 +90,7 @@ const ProjectsSection: React.FC = () => {
               )}
               
               <div className="flex flex-wrap gap-1 justify-end">
-                {project.tools.slice(0, 2).map(tool => (
+                {project.tools.map(tool => (
                   <span key={tool} className="text-xs px-2 py-0.5 rounded-md dark:bg-white/5 light:bg-black/10 border dark:border-white/10 light:border-black/20 dark:text-gray-400 light:text-gray-800 uppercase font-bold tracking-wider transition-colors duration-300">
                     {tool}
                   </span>

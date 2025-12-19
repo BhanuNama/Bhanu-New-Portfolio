@@ -7,6 +7,14 @@ const Navigation: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    e.preventDefault();
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <nav className="fixed top-0 w-full z-40 px-6 py-4 flex justify-between items-center glass border-b-0" role="navigation" aria-label="Main navigation">
       <a 
@@ -21,12 +29,12 @@ const Navigation: React.FC = () => {
         BN.
       </a>
       <div className="hidden md:flex gap-8 text-base font-medium text-theme-secondary" role="menubar">
-        <a href="#about" className="hover:text-theme-primary transition-colors" aria-label="About section">About</a>
-        <a href="#skills" className="hover:text-theme-primary transition-colors" aria-label="Skills section">Skills</a>
-        <a href="#projects" className="hover:text-theme-primary transition-colors" aria-label="Projects section">Projects</a>
-        <a href="#activity" className="hover:text-theme-primary transition-colors" aria-label="Coding activity section">Activity</a>
-        <a href="#education" className="hover:text-theme-primary transition-colors" aria-label="Education section">Education</a>
-        <a href="#contact" className="hover:text-theme-primary transition-colors" aria-label="Contact section">Contact</a>
+        <a href="#about" onClick={(e) => scrollToSection(e, 'about')} className="hover:text-theme-primary transition-colors" aria-label="About section">About</a>
+        <a href="#skills" onClick={(e) => scrollToSection(e, 'skills')} className="hover:text-theme-primary transition-colors" aria-label="Skills section">Skills</a>
+        <a href="#projects" onClick={(e) => scrollToSection(e, 'projects')} className="hover:text-theme-primary transition-colors" aria-label="Projects section">Projects</a>
+        <a href="#activity" onClick={(e) => scrollToSection(e, 'activity')} className="hover:text-theme-primary transition-colors" aria-label="Coding activity section">Activity</a>
+        <a href="#education" onClick={(e) => scrollToSection(e, 'education')} className="hover:text-theme-primary transition-colors" aria-label="Education section">Education</a>
+        <a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className="hover:text-theme-primary transition-colors" aria-label="Contact section">Contact</a>
       </div>
       <div className="flex gap-4 items-center">
         <ThemeToggle />

@@ -18,9 +18,11 @@ interface ContactSectionProps {
     message: string;
   }>>;
   handleFormSubmit: (e: React.FormEvent) => void;
+  isSubmitting: boolean;
+  submitStatus: { type: 'success' | 'error' | null; message: string };
 }
 
-const ContactSection: React.FC<ContactSectionProps> = ({ formData, setFormData, handleFormSubmit }) => {
+const ContactSection: React.FC<ContactSectionProps> = ({ formData, setFormData, handleFormSubmit, isSubmitting, submitStatus }) => {
   return (
     <section id="contact" className="py-24 max-w-7xl mx-auto px-4">
       <div className="text-center mb-16">
@@ -124,13 +126,40 @@ const ContactSection: React.FC<ContactSectionProps> = ({ formData, setFormData, 
                   onChange={(e) => setFormData({...formData, message: e.target.value})}
                 ></textarea>
               </div>
+              {submitStatus.type && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className={`p-4 rounded-xl ${
+                    submitStatus.type === 'success'
+                      ? 'bg-green-500/10 border border-green-500/30 text-green-400'
+                      : 'bg-red-500/10 border border-red-500/30 text-red-400'
+                  }`}
+                >
+                  <p className="text-sm font-medium">{submitStatus.message}</p>
+                </motion.div>
+              )}
               <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
                 type="submit"
-                className="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl transition-all shadow-lg dark:shadow-blue-600/20 light:shadow-blue-600/30 flex items-center justify-center gap-2"
+                disabled={isSubmitting}
+                className="w-full py-4 bg-blue-600 hover:bg-blue-500 disabled:bg-blue-400 disabled:cursor-not-allowed text-white font-bold rounded-xl transition-all shadow-lg dark:shadow-blue-600/20 light:shadow-blue-600/30 flex items-center justify-center gap-2"
               >
-                <Send size={18} /> Send Message
+                {isSubmitting ? (
+                  <>
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                      className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
+                    />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    <Send size={18} /> Send Message
+                  </>
+                )}
               </motion.button>
             </form>
 

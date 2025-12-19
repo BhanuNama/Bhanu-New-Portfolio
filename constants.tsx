@@ -6,7 +6,7 @@ export const PROJECTS: Project[] = [
     id: 'freeladesk',
     title: 'FreelaDesk',
     category: 'SaaS for Freelancers',
-    date: '2024 - Present',
+    date: 'Building',
     description: [
       'Built an AI-powered SaaS platform streamlining freelance project planning, client communication, and financial oversight.',
       'Leveraged structured LLM outputs to automate project decomposition and task generation from real-world documents.',

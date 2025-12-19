@@ -12,7 +12,7 @@ import EducationSection from './components/EducationSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
-import AIChatOverlay from './components/AIChatOverlay';
+// import AIChatOverlay from './components/AIChatOverlay';
 
 const App: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -22,6 +22,8 @@ const App: React.FC = () => {
     message: ''
   });
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({ type: null, message: '' });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,10 +37,48 @@ const App: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert('Thank you for reaching out! This is a demo form.');
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: '' });
+
+    try {
+      const response = await fetch('https://formspree.io/f/xeejojkd', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitStatus({ 
+          type: 'success', 
+          message: 'Thank you for reaching out! I\'ll get back to you soon.' 
+        });
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        });
+      } else {
+        const data = await response.json();
+        throw new Error(data.error || 'Failed to send message');
+      }
+    } catch (error) {
+      setSubmitStatus({ 
+        type: 'error', 
+        message: 'Something went wrong. Please try again or contact me directly at bhanunama08@gmail.com' 
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -59,12 +99,14 @@ const App: React.FC = () => {
             formData={formData}
             setFormData={setFormData}
             handleFormSubmit={handleFormSubmit}
+            isSubmitting={isSubmitting}
+            submitStatus={submitStatus}
           />
         </main>
 
         <Footer />
         <ScrollToTop showScrollTop={showScrollTop} scrollToTop={scrollToTop} />
-        <AIChatOverlay />
+        {/* <AIChatOverlay /> */}
       </div>
     </ThemeProvider>
   );

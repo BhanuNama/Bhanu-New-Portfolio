@@ -1,9 +1,46 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, useMotionValue } from 'framer-motion';
 import { Mail, ArrowRight } from 'lucide-react';
 import EditorActivity from './EditorActivity';
 
 const HeroSection: React.FC = () => {
+  // Tilt animation for profile image
+  const tiltX = useMotionValue(0);
+  const tiltY = useMotionValue(0);
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  const handleProfileMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const midX = rect.width / 2;
+    const midY = rect.height / 2;
+
+    const maxRotate = 14; // degrees
+
+    // Horizontal movement -> rotateY
+    const rotateY = ((x - midX) / midX) * maxRotate;
+    // Vertical movement -> rotateX (invert so top hover tilts back)
+    const rotateX = -((y - midY) / midY) * maxRotate;
+
+    tiltX.set(rotateX);
+    tiltY.set(rotateY);
+  };
+
+  const handleProfileMouseLeave = () => {
+    tiltX.set(0);
+    tiltY.set(0);
+    setIsFlipped(false);
+  };
+
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    e.preventDefault();
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   // Text animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -125,6 +162,7 @@ const HeroSection: React.FC = () => {
         >
           <motion.a
             href="#projects"
+            onClick={(e) => scrollToSection(e, 'projects')}
             className="group relative px-8 py-4 dark:bg-white dark:text-black light:bg-gray-900 light:text-white font-semibold rounded-xl overflow-hidden transition-all duration-300 dark:shadow-[0_0_20px_rgba(255,255,255,0.1)] light:shadow-[0_0_20px_rgba(0,0,0,0.1)]"
             whileHover={{ scale: 1.02, y: -2 }}
             whileTap={{ scale: 0.98 }}
@@ -143,6 +181,7 @@ const HeroSection: React.FC = () => {
 
           <motion.a
             href="#contact"
+            onClick={(e) => scrollToSection(e, 'contact')}
             className="group px-8 py-4 glass text-theme-primary font-semibold rounded-xl border dark:border-white/10 light:border-black/10 hover:border-theme-primary/30 transition-all duration-300 flex items-center gap-2"
             whileHover={{ scale: 1.02, y: -2 }}
             whileTap={{ scale: 0.98 }}
@@ -171,7 +210,42 @@ const HeroSection: React.FC = () => {
         <div className="absolute inset-0 bg-blue-500/20 dark:bg-blue-500/20 light:bg-blue-400/30 rounded-full blur-3xl animate-pulse transition-colors duration-500" />
         <div className="relative w-full h-full rounded-[40px] glass border dark:border-white/20 light:border-black/20 overflow-hidden flex items-center justify-center p-8 transition-colors duration-300">
           <div className="text-8xl font-black opacity-10 select-none text-theme-primary">BN</div>
-          <div className="absolute inset-4 border-2 border-dashed dark:border-white/10 light:border-black/10 rounded-[32px] transition-colors duration-300" />
+          <motion.div
+            className="absolute inset-4 border-2 border-dashed dark:border-white/10 light:border-black/10 rounded-[32px] overflow-hidden flex items-center justify-center transition-colors duration-300 [transform-style:preserve-3d]"
+            style={{ rotateX: tiltX, rotateY: tiltY, transformPerspective: 900 }}
+            onMouseMove={handleProfileMouseMove}
+            onMouseLeave={handleProfileMouseLeave}
+            onMouseEnter={() => setIsFlipped(true)}
+          >
+            {/* Front face - default profile */}
+            <motion.div
+              className="absolute inset-0 [backface-visibility:hidden]"
+              animate={{ rotateY: isFlipped ? 180 : 0 }}
+              transition={{ duration: 0.5, ease: 'easeInOut' }}
+            >
+              <img
+                src="/images/Profile.jpg"
+                alt="Bhanu Nama"
+                className="w-full h-full object-cover rounded-[28px]"
+                loading="lazy"
+              />
+            </motion.div>
+
+            {/* Back face - flipped profile */}
+            <motion.div
+              className="absolute inset-0 [backface-visibility:hidden]"
+              style={{ rotateY: 180 }}
+              animate={{ rotateY: isFlipped ? 360 : 180 }}
+              transition={{ duration: 0.5, ease: 'easeInOut' }}
+            >
+              <img
+                src="/images/FlippedProfile.jpg"
+                alt="Bhanu Nama - Flipped"
+                className="w-full h-full object-cover rounded-[28px]"
+                loading="lazy"
+              />
+            </motion.div>
+          </motion.div>
         </div>
       </motion.div>
     </section>

@@ -27,9 +27,18 @@ export async function fetchCursorActivity(): Promise<CursorActivityData> {
   }
 
   try {
-    // Use Vite proxy to avoid CORS issues
-    // The proxy adds the API key automatically from vite.config.ts
-    const baseUrl = '/api/wakatime/users/current';
+    // Determine if we're in development (has proxy) or production (direct API calls)
+    const isDevelopment = import.meta.env.DEV;
+    const baseUrl = isDevelopment 
+      ? '/api/wakatime/users/current'  // Use proxy in development
+      : 'https://wakatime.com/api/v1/users/current';  // Direct API in production
+    
+    // Prepare headers for production (proxy handles auth in development)
+    const headers: HeadersInit = {};
+    if (!isDevelopment && apiKey) {
+      const auth = btoa(`${apiKey}:`);
+      headers['Authorization'] = `Basic ${auth}`;
+    }
     
     // Calculate date ranges
     const today = new Date().toISOString().split('T')[0];
@@ -41,16 +50,16 @@ export async function fetchCursorActivity(): Promise<CursorActivityData> {
     const monthStartStr = monthStart.toISOString().split('T')[0];
     
     // Use status_bar for today (includes today's data)
-    const todayRes = await fetch(`${baseUrl}/status_bar/today`);
+    const todayRes = await fetch(`${baseUrl}/status_bar/today`, { headers });
     
     // Use summaries for week (free tier supports up to 7 days)
-    const weekRes = await fetch(`${baseUrl}/summaries?start=${weekStartStr}&end=${today}`);
+    const weekRes = await fetch(`${baseUrl}/summaries?start=${weekStartStr}&end=${today}`, { headers });
     
     // Use stats endpoint for month (last_30_days - free tier supports this)
-    const monthRes = await fetch(`${baseUrl}/stats/last_30_days`);
+    const monthRes = await fetch(`${baseUrl}/stats/last_30_days`, { headers });
     
     // Get heartbeats for active status (requires date parameter)
-    const heartbeatRes = await fetch(`${baseUrl}/heartbeats?date=${today}&limit=5`);
+    const heartbeatRes = await fetch(`${baseUrl}/heartbeats?date=${today}&limit=5`, { headers });
 
     // Check for API errors
     if (!todayRes.ok) {

@@ -12,7 +12,7 @@ const ASSIGNED_WORKS = [
       'Implemented job workflows, calendar planning, notifications, and exportable reports.'
     ],
     githubLink: 'https://github.com/BhanuNama/ENTNT-Ship-Management-System',
-    liveLink: 'https://entnt-ship-management-bhanunama.netlify.app/login',
+    liveLink: 'https://entnt-ship-management-bhanunama.netlify.app/',
     image: '🚢'
   },
   {
@@ -67,28 +67,41 @@ const AssignedWorksSection: React.FC = () => {
                   </ul>
                 </div>
 
-                {/* Links */}
-                <div className="flex gap-4 pt-3 border-t dark:border-white/10 light:border-black/10 transition-colors duration-300">
-                  <motion.a
-                    href={work.liveLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1 }}
-                    className="flex items-center gap-1.5 text-xs font-bold text-green-500 dark:text-green-400/90 light:text-green-600 transition-all duration-300"
-                    title="Open App"
-                  >
-                    Live <ExternalLink size={14} className="dark:text-green-400/90 light:text-green-600" />
-                  </motion.a>
-                  <motion.a
-                    href={work.githubLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1 }}
-                    className="flex items-center gap-1.5 text-xs font-bold dark:text-gray-300 light:text-gray-700 transition-all duration-300"
-                    title="View Source"
-                  >
-                    Repo <Github size={14} className="dark:text-gray-300 light:text-gray-700" />
-                  </motion.a>
+                {/* Links + Tech Stack */}
+                <div className="flex items-center justify-between gap-4 pt-3 border-t dark:border-white/10 light:border-black/10 transition-colors duration-300">
+                  <div className="flex gap-4">
+                    <motion.a
+                      href={work.liveLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.1 }}
+                      className="flex items-center gap-1.5 text-xs font-bold text-green-500 dark:text-green-400/90 light:text-green-600 transition-all duration-300"
+                      title="Open App"
+                    >
+                      Live <ExternalLink size={14} className="dark:text-green-400/90 light:text-green-600" />
+                    </motion.a>
+                    <motion.a
+                      href={work.githubLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.1 }}
+                      className="flex items-center gap-1.5 text-xs font-bold dark:text-gray-300 light:text-gray-700 transition-all duration-300"
+                      title="View Source"
+                    >
+                      Repo <Github size={14} className="dark:text-gray-300 light:text-gray-700" />
+                    </motion.a>
+                  </div>
+
+                  <div className="flex flex-wrap gap-1 justify-end">
+                    {['React', 'TypeScript', 'TailwindCSS'].map((tool) => (
+                      <span
+                        key={tool}
+                        className="text-[10px] px-2 py-0.5 rounded-md dark:bg-white/5 light:bg-black/10 border dark:border-white/10 light:border-black/20 dark:text-gray-400 light:text-gray-800 uppercase font-bold tracking-wider transition-colors duration-300"
+                      >
+                        {tool}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </GlassCard>
