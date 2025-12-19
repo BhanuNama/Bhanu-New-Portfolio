@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>Bhanu Nama | Software Developer | MERN Stack | Full Stack Developer</title>
+    <meta name="title" content="Bhanu Nama | Software Developer | MERN Stack | Full Stack Developer">
+    <meta name="description" content="Software Developer | CSE Graduate. I build scalable, user-focused web applications using the MERN stack, Java, and database systems. Explore my projects, skills, and coding activity.">
+    <meta name="keywords" content="Bhanu Nama, Software Developer, Full Stack Developer, MERN Stack, React Developer, Node.js Developer, Java Developer, Web Developer, Portfolio, CSE Graduate, MongoDB, Express.js, JavaScript, TypeScript">
+    <meta name="author" content="Bhanu Nama">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bhanunama.dev/">
+    <meta property="og:title" content="Bhanu Nama | Software Developer | MERN Stack Developer">
+    <meta property="og:description" content="Software Developer | CSE Graduate. I build scalable, user-focused web applications using the MERN stack, Java, and database systems.">
+    <meta property="og:image" content="https://bhanunama.dev/og-image.jpg">
+    <meta property="og:site_name" content="Bhanu Nama Portfolio">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://bhanunama.dev/">
+    <meta property="twitter:title" content="Bhanu Nama | Software Developer | MERN Stack Developer">
+    <meta property="twitter:description" content="Software Developer | CSE Graduate. I build scalable, user-focused web applications using the MERN stack, Java, and database systems.">
+    <meta property="twitter:image" content="https://bhanunama.dev/og-image.jpg">
+    <meta property="twitter:creator" content="@BhanuNama">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://bhanunama.dev/">
+    
+    <!-- Robots -->
+    <link rel="robots" href="/robots.txt">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>BN</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>BN</text></svg>">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#030712" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@1..1000&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --transition-speed: 0.3s;
+        }
+        
+        [data-theme="dark"] {
+            --bg-primary: #030712;
+            --bg-secondary: rgba(255, 255, 255, 0.03);
+            --bg-secondary-hover: rgba(255, 255, 255, 0.08);
+            --text-primary: #f9fafb;
+            --text-secondary: #9ca3af;
+            --text-tertiary: #6b7280;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --border-color-hover: rgba(255, 255, 255, 0.2);
+            --scrollbar-track: #030712;
+            --scrollbar-thumb: #1f2937;
+            --scrollbar-thumb-hover: #374151;
+        }
+        
+        [data-theme="light"] {
+            --bg-primary: #ffffff;
+            --bg-secondary: rgba(0, 0, 0, 0.03);
+            --bg-secondary-hover: rgba(0, 0, 0, 0.08);
+            --text-primary: #111827;
+            --text-secondary: #4b5563;
+            --text-tertiary: #9ca3af;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --border-color-hover: rgba(0, 0, 0, 0.2);
+            --scrollbar-track: #f3f4f6;
+            --scrollbar-thumb: #d1d5db;
+            --scrollbar-thumb-hover: #9ca3af;
+        }
+        
+        body {
+            font-family: 'Sofia Sans', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            font-optical-sizing: auto;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+        }
+        
+        .glass {
+            background: var(--bg-secondary);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            transition: background var(--transition-speed) ease, border-color var(--transition-speed) ease;
+        }
+        
+        .glass-hover:hover {
+            background: var(--bg-secondary-hover);
+            border: 1px solid var(--border-color-hover);
+            transition: all 0.3s ease;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--scrollbar-track);
+            transition: background var(--transition-speed) ease;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+            border-radius: 10px;
+            transition: background var(--transition-speed) ease;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--scrollbar-thumb-hover);
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Theme-aware utility classes */
+        [data-theme="dark"] .text-theme-primary { color: #f9fafb !important; }
+        [data-theme="light"] .text-theme-primary { color: #111827 !important; }
+        
+        [data-theme="dark"] .text-theme-secondary { color: #9ca3af !important; }
+        [data-theme="light"] .text-theme-secondary { color: #4b5563 !important; }
+        
+        [data-theme="dark"] .text-theme-tertiary { color: #6b7280 !important; }
+        [data-theme="light"] .text-theme-tertiary { color: #9ca3af !important; }
+        
+        [data-theme="dark"] .bg-theme-primary { background-color: #030712 !important; }
+        [data-theme="light"] .bg-theme-primary { background-color: #ffffff !important; }
+        
+        [data-theme="dark"] .bg-theme-secondary { background-color: rgba(255, 255, 255, 0.03) !important; }
+        [data-theme="light"] .bg-theme-secondary { background-color: rgba(0, 0, 0, 0.03) !important; }
+        
+        /* Light theme specific overrides for Tailwind classes */
+        [data-theme="light"] .light\:text-blue-600 { color: #2563eb !important; }
+        [data-theme="light"] .light\:bg-gray-900 { background-color: #111827 !important; }
+        [data-theme="light"] .light\:text-white { color: #ffffff !important; }
+        [data-theme="light"] .light\:hover\:bg-gray-800:hover { background-color: #1f2937 !important; }
+        [data-theme="light"] .light\:bg-blue-400\/30 { background-color: rgba(96, 165, 250, 0.3) !important; }
+        [data-theme="light"] .light\:border-black\/20 { border-color: rgba(0, 0, 0, 0.2) !important; }
+        [data-theme="light"] .light\:border-black\/10 { border-color: rgba(0, 0, 0, 0.1) !important; }
+        [data-theme="light"] .light\:hover\:bg-black\/10:hover { background-color: rgba(0, 0, 0, 0.1) !important; }
+        [data-theme="light"] .light\:bg-black\/5 { background-color: rgba(0, 0, 0, 0.05) !important; }
+        [data-theme="light"] .light\:border-black\/10 { border-color: rgba(0, 0, 0, 0.1) !important; }
+        [data-theme="light"] .light\:placeholder\:text-gray-400::placeholder { color: #9ca3af !important; }
+        [data-theme="light"] .light\:shadow-blue-600\/30 { box-shadow: 0 0 20px rgba(37, 99, 235, 0.3) !important; }
+        [data-theme="light"] .light\:text-green-600 { color: #16a34a !important; }
+        [data-theme="light"] .light\:text-red-600 { color: #dc2626 !important; }
+        [data-theme="light"] .light\:text-gray-800 { color: #1f2937 !important; }
+        [data-theme="light"] .light\:text-gray-700 { color: #374151 !important; }
+        [data-theme="light"] .light\:text-gray-300 { color: #d1d5db !important; }
+        [data-theme="light"] .light\:border-black\/20 { border-color: rgba(0, 0, 0, 0.2) !important; }
+        [data-theme="light"] .light\:border-black\/30 { border-color: rgba(0, 0, 0, 0.3) !important; }
+        [data-theme="light"] .light\:bg-black\/10 { background-color: rgba(0, 0, 0, 0.1) !important; }
+        [data-theme="light"] .light\:bg-purple-400\/20 { background-color: rgba(192, 132, 252, 0.2) !important; }
+        [data-theme="light"] .light\:from-gray-900 { --tw-gradient-from: #111827 !important; }
+        [data-theme="light"] .light\:via-gray-800 { --tw-gradient-to: #1f2937 !important; }
+        [data-theme="light"] .light\:to-gray-700 { --tw-gradient-to: #374151 !important; }
+        
+        /* Force solid black for name in light theme */
+        [data-theme="light"] #about h1,
+        [data-theme="light"] #about h1 span,
+        [data-theme="light"] #about h1 span span {
+            color: #000000 !important;
+            background: none !important;
+            -webkit-background-clip: unset !important;
+            background-clip: unset !important;
+        }
+        
+        /* Fix GitHub calendar scrolling */
+        .react-activity-calendar {
+            overflow-x: auto !important;
+            overflow-y: visible !important;
+            -webkit-overflow-scrolling: touch !important;
+        }
+        
+        .react-activity-calendar article {
+            min-width: fit-content !important;
+            width: max-content !important;
+        }
+        
+        /* Custom scrollbar for calendar */
+        .react-activity-calendar::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .react-activity-calendar::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+            border-radius: 4px;
+        }
+        
+        .react-activity-calendar::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+        
+        .react-activity-calendar::-webkit-scrollbar-thumb:hover {
+            background: var(--border-color-hover);
+        }
+    </style>
+<script>
+        // Set initial theme before React loads
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+            const theme = savedTheme || (systemPrefersLight ? 'light' : 'dark');
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+</script>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.561.0",
+    "framer-motion": "https://esm.sh/framer-motion@^12.23.26",
+    "@google/genai": "https://esm.sh/@google/genai@^1.34.0",
+    "react-github-calendar": "https://esm.sh/react-github-calendar@^4.5.2"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+
+<!-- Structured Data (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Bhanu Nama",
+  "jobTitle": "Software Developer",
+  "description": "Software Developer and CSE Graduate passionate about building innovative applications with the MERN stack, Java, and database systems.",
+  "url": "https://bhanunama.dev",
+  "sameAs": [
+    "https://github.com/BhanuNama",
+    "https://linkedin.com/in/bhanu-nama-654957281"
+  ],
+  "knowsAbout": [
+    "MERN Stack",
+    "React",
+    "Node.js",
+    "Express.js",
+    "MongoDB",
+    "JavaScript",
+    "TypeScript",
+    "Java",
+    "MySQL",
+    "Full Stack Development",
+    "Web Development"
+  ],
+  "alumniOf": {
+    "@type": "EducationalOrganization",
+    "name": "CSE Graduate"
+  },
+  "email": "bhanunama08@gmail.com"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Bhanu Nama Portfolio",
+  "url": "https://bhanunama.dev",
+  "description": "Portfolio website of Bhanu Nama - Software Developer specializing in MERN stack, Java, and database systems.",
+  "author": {
+    "@type": "Person",
+    "name": "Bhanu Nama"
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://bhanunama.dev/?s={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Portfolio",
+  "name": "Bhanu Nama Portfolio",
+  "url": "https://bhanunama.dev",
+  "author": {
+    "@type": "Person",
+    "name": "Bhanu Nama",
+    "jobTitle": "Software Developer"
+  },
+  "description": "Showcase of software development projects, skills, and coding activity by Bhanu Nama."
+}
+</script>
+</head>
+<body>
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
